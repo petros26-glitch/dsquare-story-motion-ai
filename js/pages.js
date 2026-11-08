@@ -60,6 +60,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const clearStory = document.querySelector("#clear-story");
+  if (clearStory && storyInput && wordCount && sceneList) {
+    clearStory.addEventListener("click", () => {
+      storyInput.value = "";
+      wordCount.textContent = "0";
+      sceneList.replaceChildren();
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "Your scenes will appear here after you add a story.";
+      sceneList.append(empty);
+      const notice = document.querySelector("#scene-notice");
+      if (notice) notice.textContent = "Your draft scenes will appear below. This is a local preview; AI services are not connected yet.";
+      storyInput.focus();
+    });
+  }
+
   const year = document.querySelectorAll("[data-current-year]");
   year.forEach(node => node.textContent = String(new Date().getFullYear()));
 });
